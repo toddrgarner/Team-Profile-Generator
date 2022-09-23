@@ -3,20 +3,55 @@ const fs = require("fs");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+const { type } = require("os");
 // const renderEmployeeCards = require("./src/generateHTML");
 
 // an empty array where the questions will get pushed
 const employeeArray = [];
-
-
-const managerQuestions = () => {
+const managerQuestions = () => { 
     return inquirer.prompt([{
+    
+    
+        type: "input ",
+        name: "name",
+        message: "Enter manager's name"
+     },
+    {
+        type: "input ",
+        name: "name",
+        message: "Enter manager's id"
+    },
+    {
+        type: "input ",
+        name: "name",
+        message: "Enter manager's email",
+        validate: function (input) {
+            {
+            // Regex mail check (return true if valid mail)
+            validEmail =
+              /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+                input
+              );
         
-    }])
+            if (validEmail) {
+              return true;
+            } else {
+              console.log(" --- Please enter a valid email address ---");
+              return false;
+            }
+          }
+        },
+    }
+ ])
 
-   
-}
-
+ .then(managerData => {
+    const { name, id, email, officeNumber } = managerData;
+    const manager = new Manager(name, id, email, officeNumber);
+    employeeArray.push(manager);
+    console.log(manager);
+})
+};
+ 
 
 const employeeQuestions = () => {
   return inquirer
@@ -42,13 +77,13 @@ const employeeQuestions = () => {
         name: "email",
         message: "Enter employee email address",
         validate: function (input) {
-          {
+            {
             // Regex mail check (return true if valid mail)
             validEmail =
               /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
                 input
               );
-
+        
             if (validEmail) {
               return true;
             } else {
@@ -58,17 +93,20 @@ const employeeQuestions = () => {
           }
         },
       },
+           
       {
         type: "input",
         name: "officeNumber",
         message: "Enter manager's office number",
       },
+
       {
         type: "input",
         name: "github",
         message: "Enter engineer github",
-        when: (input) => input.role === "Engineer",
+        when: (input) => input.role === "Engineer"
       },
+
       {
         type: "input",
         name: "intern",
@@ -104,16 +142,16 @@ const employeeQuestions = () => {
 };
 employeeQuestions();
 
-//const manager = new Manager(name, id, email, officeNumber);
-//employeeArray.push(manager)
-//console.log(employeeArray)
+// const manager = new Manager(name, id, email, officeNumber);
+// employeeArray.push(manager)
+// console.log(employeeArray)
 
-// // function to create html file for team
-// function writeToFile(fileName, data) {
-//     fs.writeFile(fileName, data, (err) =>
-//         (err) ? console.log("error") : console.log("HTML File Generated")
-//     )
-// }
+// function to create html file for team
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) =>
+        (err) ? console.log("error") : console.log("HTML File Generated")
+    )
+}
 
-// // Function call to initialize app
-// init()
+// Function call to initialize app
+init()
