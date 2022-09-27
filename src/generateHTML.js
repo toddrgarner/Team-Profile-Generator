@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 const managersCard = manager => {
     return `<div class="col-4 mt-4">
     <div class="card h-100">
@@ -94,7 +87,15 @@ const renderEmployeeCards = function(employeeCards) {
         <title>Team Profile Generator</title>
       </head>
       <body>
+      
+
     ${employeeCards}
+
+    <!-- Links -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
       </body>
     </html>`
 }  
