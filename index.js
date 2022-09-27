@@ -3,36 +3,37 @@ const fs = require("fs");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+const generateHTML = require("./src/generateHTML.js");
 const { type } = require("os");
-// const renderEmployeeCards = require("./src/generateHTML");
+const employeeArray = [];
 
 // an empty array where the questions will get pushed
-const employeeArray = [];
-const managerQuestions = () => { 
-    return inquirer.prompt([{
-    
-    
+
+const managerQuestions = () => {
+  return inquirer
+    .prompt([
+      {
         type: "input ",
         name: "name",
-        message: "Enter manager's name"
-     },
-    {
+        message: "Enter manager's name",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter manager's id",
+      },
+      {
         type: "input ",
-        name: "name",
-        message: "Enter manager's id"
-    },
-    {
-        type: "input ",
-        name: "name",
+        name: "email",
         message: "Enter manager's email",
         validate: function (input) {
-            {
+          {
             // Regex mail check (return true if valid mail)
             validEmail =
               /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
                 input
               );
-        
+
             if (validEmail) {
               return true;
             } else {
@@ -41,17 +42,21 @@ const managerQuestions = () => {
             }
           }
         },
-    }
- ])
+      },
+      {
+        type: "input",
+        name: "officeNumber",
+        message: "Enter manager's office Number",
+      },
+    ])
 
- .then(managerData => {
-    const { name, id, email, officeNumber } = managerData;
-    const manager = new Manager(name, id, email, officeNumber);
-    employeeArray.push(manager);
-    console.log(manager);
-})
+    .then((managerData) => {
+      const { name, id, email, officeNumber } = managerData;
+      const manager = new Manager(name, id, email, officeNumber);
+      employeeArray.push(manager);
+      console.log(manager);
+    });
 };
- 
 
 const employeeQuestions = () => {
   return inquirer
@@ -77,13 +82,13 @@ const employeeQuestions = () => {
         name: "email",
         message: "Enter employee email address",
         validate: function (input) {
-            {
+          {
             // Regex mail check (return true if valid mail)
             validEmail =
               /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
                 input
               );
-        
+
             if (validEmail) {
               return true;
             } else {
@@ -93,23 +98,16 @@ const employeeQuestions = () => {
           }
         },
       },
-           
-      {
-        type: "input",
-        name: "officeNumber",
-        message: "Enter manager's office number",
-      },
-
       {
         type: "input",
         name: "github",
         message: "Enter engineer github",
-        when: (input) => input.role === "Engineer"
+        when: (input) => input.role === "Engineer",
       },
 
       {
         type: "input",
-        name: "intern",
+        name: "school",
         message: "Enter intern school",
         when: (input) => input.role === "Intern",
       },
@@ -140,18 +138,38 @@ const employeeQuestions = () => {
       }
     });
 };
-employeeQuestions();
+// employeeQuestions();
 
 // const manager = new Manager(name, id, email, officeNumber);
 // employeeArray.push(manager)
 // console.log(employeeArray)
 
+// writeToFile("./src/generateHTML", renderEmployeeCards(employeeArray))
+
+// function renderEmployeeCards(employeeArray) {
+//   const answerArray = employeeArray;
+
 // function to create html file for team
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) =>
-        (err) ? console.log("error") : console.log("HTML File Generated")
-    )
+const writeToFile = data => {
+  fs.writeFile("./dist/index.html", data, (err) =>
+    err ? console.log("error") : console.log("HTML File Generated")
+  );
 }
 
-// Function call to initialize app
-init()
+// const emply
+//writeToFile("./dist/index.html", renderEmployeeCards);
+
+managerQuestions()
+  .then(employeeQuestions).then(employeeArray => {
+    return generateHTML(employeeArray);
+    })
+    .then(pageHTML => {
+      return writeToFile(pageHTML)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+
+// // Function call to initialize app
+
