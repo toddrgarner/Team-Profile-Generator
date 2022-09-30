@@ -101,7 +101,7 @@ const employeeQuestions = () => {
       {
         type: "input",
         name: "github",
-        message: "Enter engineer github",
+        message: "Enter engineer github username",
         when: (input) => input.role === "Engineer",
       },
 

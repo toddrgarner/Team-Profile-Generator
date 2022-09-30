@@ -3,13 +3,13 @@ const managersCard = manager => {
     <div class="card h-100">
         <div class="card-header">
             <h3>${manager.name}</h3>
-            <h4>Manager</h4><i class="material-icons">groups</i>
+            <h4>Manager</h4><i class="fa-sharp fa-solid fa-user"></i>
         </div>
         <div class="card-body">
             <p class="id">ID: ${manager.id}</p>
             <p class="email">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
-            <p class="office">Office Number: ${manager.officeNum}</p>
-        </div>node 
+            <p class="office">Office Number: ${manager.officeNumber}</p>
+        </div>
     </div>
 </div>`
 }
@@ -20,7 +20,7 @@ const engineersCard = engineer => {
     <div class="card h-100">
         <div class="card-header">
             <h3>${engineer.name}</h3>
-            <h4>Engineer</h4><i class="material-icons">groups</i>
+            <h4>Engineer</h4><i class="fa-sharp fa-solid fa-gears"></i>
         </div>
         <div class="card-body">
             <p class="id">ID: ${engineer.id}</p>
@@ -36,7 +36,7 @@ const internsCard = intern => {
     <div class="card h-100">
         <div class="card-header">
             <h3>${intern.name}</h3>
-            <h4>Intern</h4><i class="material-icons">groups</i>
+            <h4>Intern</h4><i class="fa-sharp fa-solid fa-laptop-code"></i>
         </div>
         <div class="card-body">
             <p class="id">ID: ${intern.id}</p>
@@ -85,10 +85,32 @@ const renderEmployeeCards = function(employeeCards) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Team Profile Generator</title>
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous"
+    />
+    <script
+        src="https://kit.fontawesome.com/2af300434d.js"
+        crossorigin="anonymous">
+    </script>
+    
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
       </head>
-      <body>
-      
 
+      <header class="jumbotron mb-3 bg-purple">
+      <h1 class="display-4 d-flex justify-content-center">My Team Profile</h1>
+  </header>
+
+      <body> 
+
+      
     ${employeeCards}
 
     <!-- Links -->
@@ -102,3 +124,15 @@ const renderEmployeeCards = function(employeeCards) {
 
 module.exports = generateHTML;
 
+
+// employee icon
+// <i class="fa-sharp fa-solid fa-user"></i>
+
+// manager
+// <i class="fa-sharp fa-solid fa-briefcase"></i>
+
+// engineer
+// <i class="fa-sharp fa-solid fa-gears"></i>
+
+// extra choice
+// <i class="fa-sharp fa-solid fa-laptop-code"></i>
