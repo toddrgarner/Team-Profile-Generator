@@ -26,11 +26,12 @@ THEN I exit the application, and the HTML is generated <br>
 
 
 
-## Deployed Live URL:
+## Github Repository URL:
 
+https://github.com/toddrgarner/Team-Profile-Generator
 
 ## Team Profile Generator Demo
 
-
+https://drive.google.com/file/d/1oPnuWzbkFKeGZmGH3DOU517Iy0bezesV/view
 
 © 2022 Todd Garner. Confidential and Proprietary. All Rights Reserved.
