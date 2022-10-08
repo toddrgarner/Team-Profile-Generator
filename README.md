@@ -30,7 +30,7 @@ THEN I exit the application, and the HTML is generated. <br>
 
 https://github.com/toddrgarner/Team-Profile-Generator
 
-## Team Profile Generator Demo
+## Team Profile Generator Walkthrough
 
 https://drive.google.com/file/d/1oPnuWzbkFKeGZmGH3DOU517Iy0bezesV/view
 
